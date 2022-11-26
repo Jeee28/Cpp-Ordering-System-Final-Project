@@ -422,17 +422,7 @@ void paymentreceipt()
             cin >> payment;
 
             balance = balance + payment;
-            if (payment < _order_Price[i])
-            {
-                cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
-                amount_balance = _order_Price[i] - balance;
-                cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
-                cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
-                _getch();
-                system("cls");
-                goto PAYMENT;
-            }
-            else if (payment >= _order_Price[i])
+            if (balance >= _order_Price[i])
             {
                 _order_Payment[i] = "PAID";
                 total_change = balance - _order_Price[i];
@@ -441,6 +431,16 @@ void paymentreceipt()
                 cout << "\n\n"
                      << setw(25) << "THANK YOU COME BACK AGAIN \3";
                 SetConsoleTextAttribute(h, 7);
+            }
+            else
+            {
+                cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
+                amount_balance = _order_Price[i] - balance;
+                cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
+                cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
+                _getch();
+                system("cls");
+                goto PAYMENT;
             }
         }
     }
