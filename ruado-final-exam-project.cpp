@@ -1,3 +1,6 @@
+/*
+    ito po ang mga libraries na ginamit po para sa program po na ito
+*/
 #include <iostream>
 #include <iomanip>
 #include <string.h>
@@ -33,6 +36,14 @@ int main()
 {
     do
     {
+        /*
+            ito po ang OPTION menu choices
+            [1] GO TO MENUS
+            [2] VIEW RECORD
+            [3] PAYMENT & RECEIPT
+            [4] EXIT
+        */
+
         system("cls");
         cout << setw(50);
         SetConsoleTextAttribute(h, 11);
@@ -45,11 +56,15 @@ int main()
         cout << "[4] EXIT\n";
         cout << "ENTER OPTION: ";
         cin >> option;
+
+        // ito po ang OPTION menu ng menu method
         if (option == 1)
         {
             system("cls");
             menu();
         }
+
+        // ito po ang OPTION MENU ng viewrecord method
         else if (option == 2)
         {
             system("cls");
@@ -61,18 +76,24 @@ int main()
             cout << "\n===============================================================================\n";
             viewrecord();
         }
+
+        // ito po ang OPTION menu ng paymentreceipt method
         else if (option == 3)
         {
             system("cls");
             paymentreceipt();
         }
 
+        // ito po ang OPTION menu ng exit method
         else if (option == 4)
         {
             system("cls");
             exit();
         }
 
+        // ito po ay error message na kung saan kapag
+        // mali po ang input OPTION mag bibigay po sya
+        // ng error message
         else
         {
             SetConsoleTextAttribute(h, 4);
@@ -91,6 +112,13 @@ int main()
 }
 
 // ito po ay menu function definition
+/*
+    dito po makikita ang mga OPTION menu para sa
+    [1] GO TO MENUS
+    [2] VIEW RECORD
+    [3] PAYMENT & RECEIPT
+    [4] EXIT
+*/
 void menu()
 {
     cin.ignore();
@@ -108,10 +136,15 @@ void menu()
     {
         if (_fullname[i] == "\0")
         {
+            /*
+                ito po ang OPTION MENUS ng TAKOYAKI
+                gumamit din po ako ng goto
+                para sa specific back po
+            */
         jump:
             system("cls");
             SetConsoleTextAttribute(h, 14);
-            cout << setw(50) << "TAKOYAKI MENUS\n";
+            cout << setw(45) << "KIKI TAKOYAKI MENUS\n";
             cout << "==================================================================================\n";
             SetConsoleTextAttribute(h, 7);
             cout << setw(15) << "Flavors" << setw(15) << "4pcs" << setw(15) << "6pcs" << setw(17) << "8pcs\n";
@@ -337,10 +370,15 @@ void menu()
             main();
             break; // ito po break is para pag add po sya ng record 1 record at a time
         }
+
+        /*
+            dito po ay kapag ang customer po ay meron na record
+            mag bibigay po sya ng message na CUSTOMER IS ALREADY EXIST
+        */
         else if (_fullname[i] == fullname)
         {
             SetConsoleTextAttribute(h, 4);
-            cout << "\nRECORD IS ALREADY EXIST PLEASE ENTER OTHER NAME";
+            cout << "\nCUSTOMER IS ALREADY EXIST PLEASE ENTER OTHER NAME";
             SetConsoleTextAttribute(h, 7);
             cout << "\n===============================================================================\n";
             cout << "PRESS ANY KEY TO CONTINUE...";
@@ -351,6 +389,10 @@ void menu()
     }
 }
 
+/*
+    ang viewrecord na method po ng ito ay para mag view ng
+    mga customer na gusto umorder ng takoyaki
+*/
 void viewrecord()
 {
     int recordList = 0;
@@ -364,10 +406,12 @@ void viewrecord()
         {
             recordList++;
             payment_color = _order_Payment[i];
+            // dito po ay kapag NOT PAID pa po sya ang kulay nya po is RED
             if (payment_color == "NOT PAID")
             {
                 SetConsoleTextAttribute(h, 4);
             }
+            // at dito naman po kapag PAID na po sya ang magiging kulay na po nya is GREEN
             else if (payment_color == "PAID")
             {
                 SetConsoleTextAttribute(h, 2);
@@ -379,6 +423,11 @@ void viewrecord()
         }
     }
 
+    /*
+        ito naman po ay kapag wala po customer na
+        nakarecord mag lalabas po sya ng
+        NO RECORD FOUND
+    */
     if (recordList == 0)
     {
         SetConsoleTextAttribute(h, 4);
@@ -390,7 +439,8 @@ void viewrecord()
     _getch();
 }
 
-// ito po ay ang bayadan ng mga order at dito po makikita and resibo ng mga order
+// ito po ay ang bayadan ng mga order at dito po
+// kasama na makikita ang resibo ng mga order ng program
 void paymentreceipt()
 {
     cin.ignore();
@@ -407,6 +457,10 @@ void paymentreceipt()
     {
         if (_fullname[i] == fullname)
         {
+            /**
+                ito po ay kapag PAID na nag customer
+                receipt nalang po ang lalabas
+            **/
             if (_order_Payment[i] == "PAID")
             {
                 system("cls");
@@ -429,8 +483,15 @@ void paymentreceipt()
                      << setw(25) << "THANK YOU COME BACK AGAIN \3";
                 SetConsoleTextAttribute(h, 7);
             }
+            /*
+                ito po ay kapag nag customer a NOT PAID ay
+                need nya po mag bayad
+            */
             else if (_order_Payment[i] == "NOT PAID")
             {
+                /*
+                    gumamit din po ako ng goto para sa specific back po
+                */
             PAYMENT:
                 system("cls");
                 recordList++;
@@ -462,6 +523,10 @@ void paymentreceipt()
                 }
                 else
                 {
+                    /*
+                        ito po ang error message kapag kulang po ang
+                        payment ni customer
+                    */
                     cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
                     amount_balance = _order_Price[i] - balance;
                     cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
@@ -474,6 +539,11 @@ void paymentreceipt()
         }
     }
 
+    /*
+        ito naman po ay kapag wala po customer na
+        nakarecord mag lalabas po sya ng
+        NO RECORD FOUND
+    */
     if (recordList == 0)
     {
         SetConsoleTextAttribute(h, 11);
@@ -491,6 +561,10 @@ void paymentreceipt()
 }
 
 // ito po ay exit menu function definition
+/*
+    ang exit method po na ito ay para mag exit po ang
+    program
+*/
 void exit()
 {
     cout << "\n=================================================================================\n";
