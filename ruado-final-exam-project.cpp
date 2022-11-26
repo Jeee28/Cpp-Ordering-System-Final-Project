@@ -17,6 +17,8 @@ string _takoyaki_Order[maxsize] = {};
 string _order_Payment[maxsize] = {};
 double _order_Price[maxsize] = {};
 double _order_Quantity[maxsize] = {};
+double _payment[maxsize] = {};
+double _payment_change[maxsize] = {};
 
 // global variable for option
 int option, quantity, pieces;
@@ -405,42 +407,69 @@ void paymentreceipt()
     {
         if (_fullname[i] == fullname)
         {
-        PAYMENT:
-            system("cls");
-            recordList++;
-            SetConsoleTextAttribute(h, 11);
-            cout << "" << setw(25) << "RECEIPT\n";
-            SetConsoleTextAttribute(h, 8);
-            cout << "======================================\n";
-            cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
-            cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
-            cout << "PRICE: " << setw(30) << _order_Price[i] << "\n";
-            cout << "QUANTITY: " << setw(25) << _order_Quantity[i] << "\n\n";
-            cout << "======================================\n";
-            cout << "TOTAL PRICE IS: " << setw(21) << _order_Price[i];
-            cout << "\nINPUT PAYMENT:\t\t\t  ";
-            cin >> payment;
-
-            balance = balance + payment;
-            if (balance >= _order_Price[i])
+            if (_order_Payment[i] == "PAID")
             {
-                _order_Payment[i] = "PAID";
-                total_change = balance - _order_Price[i];
-                cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << total_change;
+                system("cls");
+                recordList++;
+                SetConsoleTextAttribute(h, 11);
+                cout << "" << setw(25) << "RECEIPT\n";
+                SetConsoleTextAttribute(h, 8);
+                cout << "======================================\n";
+                cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
+                cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
+                cout << "PRICE: " << setw(30) << _order_Price[i] << "\n";
+                cout << "QUANTITY: " << setw(25) << _order_Quantity[i] << "\n\n";
+                cout << "======================================\n";
+                cout << "TOTAL PRICE IS: " << setw(21) << _order_Price[i];
+                cout << "\nINPUT PAYMENT:\t\t\t  " << _payment[i];
+
+                cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << _payment_change[i];
                 SetConsoleTextAttribute(h, 2);
                 cout << "\n\n"
                      << setw(25) << "THANK YOU COME BACK AGAIN \3";
                 SetConsoleTextAttribute(h, 7);
             }
-            else
+            else if (_order_Payment[i] == "NOT PAID")
             {
-                cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
-                amount_balance = _order_Price[i] - balance;
-                cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
-                cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
-                _getch();
+            PAYMENT:
                 system("cls");
-                goto PAYMENT;
+                recordList++;
+                SetConsoleTextAttribute(h, 11);
+                cout << "" << setw(25) << "RECEIPT\n";
+                SetConsoleTextAttribute(h, 8);
+                cout << "======================================\n";
+                cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
+                cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
+                cout << "PRICE: " << setw(30) << _order_Price[i] << "\n";
+                cout << "QUANTITY: " << setw(25) << _order_Quantity[i] << "\n\n";
+                cout << "======================================\n";
+                cout << "TOTAL PRICE IS: " << setw(20) << _order_Price[i];
+                cout << "\nINPUT PAYMENT:\t\t\t ";
+                cin >> payment;
+
+                balance = balance + payment;
+                if (balance >= _order_Price[i])
+                {
+                    _payment[i] = balance;
+                    _order_Payment[i] = "PAID";
+                    total_change = balance - _order_Price[i];
+                    _payment_change[i] = total_change;
+                    cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << total_change;
+                    SetConsoleTextAttribute(h, 2);
+                    cout << "\n\n"
+                         << setw(25) << "THANK YOU COME BACK AGAIN \3";
+                    SetConsoleTextAttribute(h, 7);
+                }
+                else
+                {
+                    cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
+                    amount_balance = _order_Price[i] - balance;
+                    cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
+                    cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
+                    _getch();
+                    system("cls");
+                    goto PAYMENT;
+                }
             }
         }
     }
