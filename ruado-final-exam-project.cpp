@@ -31,9 +31,12 @@ void menu();
 void viewrecord();
 void paymentreceipt();
 void exit();
+void loadingBar();
 
 int main()
 {
+    system("cls");
+    loadingBar();
     do
     {
         /*
@@ -61,6 +64,7 @@ int main()
         if (option == 1)
         {
             system("cls");
+            loadingBar();
             menu();
         }
 
@@ -68,7 +72,8 @@ int main()
         else if (option == 2)
         {
             system("cls");
-
+            loadingBar();
+            system("cls");
             SetConsoleTextAttribute(h, 11);
             cout << setw(50);
             cout << "LIST OF PERSON WHO ORDERED";
@@ -81,12 +86,16 @@ int main()
         else if (option == 3)
         {
             system("cls");
+            loadingBar();
+            system("cls");
             paymentreceipt();
         }
 
         // ito po ang OPTION menu ng exit method
         else if (option == 4)
         {
+            system("cls");
+            loadingBar();
             system("cls");
             exit();
         }
@@ -132,6 +141,9 @@ void menu()
     cout << "ENTER FULLNAME: ";
     getline(cin, fullname);
 
+    cout << "\n\nPLEASE ENTER ANY KEY TO CONTINUE...";
+    _getch();
+
     for (int i = 0; i < maxsize; i++)
     {
         if (_fullname[i] == "\0")
@@ -142,6 +154,8 @@ void menu()
                 para sa specific back po
             */
         jump:
+            system("cls");
+            loadingBar();
             system("cls");
             SetConsoleTextAttribute(h, 14);
             cout << setw(45) << "KIKI TAKOYAKI MENUS\n";
@@ -437,6 +451,8 @@ void viewrecord()
     }
     cout << "\n\nPLEASE ENTER ANY KEY TO GO BACK...";
     _getch();
+    system("cls");
+    loadingBar();
 }
 
 // ito po ay ang bayadan ng mga order at dito po
@@ -453,6 +469,10 @@ void paymentreceipt()
     SetConsoleTextAttribute(h, 7);
     cout << "ENTER FULLNAME: ";
     getline(cin, fullname);
+
+    cout << "\n\nPLEASE ENTER ANY KEY TO CONTINUE...";
+    _getch();
+
     for (int i = 0; i < maxsize; i++)
     {
         if (_fullname[i] == fullname)
@@ -463,6 +483,8 @@ void paymentreceipt()
             **/
             if (_order_Payment[i] == "PAID")
             {
+                system("cls");
+                loadingBar();
                 system("cls");
                 recordList++;
                 SetConsoleTextAttribute(h, 11);
@@ -480,7 +502,7 @@ void paymentreceipt()
                 cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << _payment_change[i];
                 SetConsoleTextAttribute(h, 2);
                 cout << "\n\n"
-                     << setw(25) << "THANK YOU COME BACK AGAIN \3";
+                     << setw(25) << "YOU ARE ALREADY PAID \3";
                 SetConsoleTextAttribute(h, 7);
             }
             /*
@@ -493,6 +515,8 @@ void paymentreceipt()
                     gumamit din po ako ng goto para sa specific back po
                 */
             PAYMENT:
+                system("cls");
+                loadingBar();
                 system("cls");
                 recordList++;
                 SetConsoleTextAttribute(h, 11);
@@ -532,7 +556,8 @@ void paymentreceipt()
                     cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
                     cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
                     _getch();
-                    system("cls");
+
+                    loadingBar();
                     goto PAYMENT;
                 }
             }
@@ -546,6 +571,9 @@ void paymentreceipt()
     */
     if (recordList == 0)
     {
+        system("cls");
+        loadingBar();
+        system("cls");
         SetConsoleTextAttribute(h, 11);
         cout << "\n"
              << setw(25) << "RECEIPT\n";
@@ -558,6 +586,8 @@ void paymentreceipt()
     }
     cout << "\n\nPLEASE ENTER ANY KEY TO GO BACK...";
     _getch();
+    system("cls");
+    loadingBar();
 }
 
 // ito po ay exit menu function definition
@@ -567,6 +597,7 @@ void paymentreceipt()
 */
 void exit()
 {
+    SetConsoleTextAttribute(h, 7);
     cout << "\n=================================================================================\n";
     cout << "|"
          << setw(80) << "|";
@@ -580,4 +611,40 @@ void exit()
     cout << "\n=================================================================================\n";
     _getch();
     exit(0);
+}
+
+void loadingBar()
+{
+    // 0 - black background,
+    // A - Green Foreground
+    SetConsoleTextAttribute(h, 2);
+
+    // Initialize char for printing
+    // loading bar
+    char a = 177,
+         b = 219;
+
+    cout << "\n\n\n\n";
+    cout << "\n\n\n\n\t\t\t\tLoading...\n\n";
+    cout << "\t\t\t\t";
+
+    // Print initial loading bar
+    for (int i = 0; i < 26; i++)
+    {
+        cout << a;
+    }
+
+    // Set the cursor again starting
+    // point of loading bar
+    cout << "\r";
+    cout << "\t\t\t\t";
+
+    // Print loading bar progress
+    for (int i = 0; i < 26; i++)
+    {
+        cout << b;
+
+        // Sleep for 1 second
+        Sleep(100);
+    }
 }
