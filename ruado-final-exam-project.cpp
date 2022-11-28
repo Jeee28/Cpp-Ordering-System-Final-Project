@@ -3,6 +3,7 @@
 */
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <string.h>
 #include <windows.h>
 #include <conio.h>
@@ -34,11 +35,18 @@ void viewrecord();
 void paymentreceipt();
 void exit();
 void loadingBar();
+void banner();
 
 int main()
 {
     system("cls");
-    loadingBar();
+    loadingBar();                  // progress loading bar
+    SetConsoleTextAttribute(h, 7); // text color changer
+    system("cls");
+    banner(); // banner Welcome
+    _getch();
+    system("cls");
+    loadingBar(); // progress loading bar
     do
     {
         /*
@@ -52,7 +60,7 @@ int main()
         system("cls");
         cout << setw(50);
         SetConsoleTextAttribute(h, 11);
-        cout << "WELECOME TO MY KIKI TAKOYAKI";
+        cout << "WELECOME TO MY JEAN TAKOYAKI";
         cout << "\n===============================================================================\n";
         SetConsoleTextAttribute(h, 7);
         cout << "[1] GO TO MENUS\n";
@@ -66,40 +74,41 @@ int main()
         if (option == 1)
         {
             system("cls");
-            loadingBar();
-            menu();
+            loadingBar(); // loading progress bar
+            menu();       // menu method
         }
 
         // ito po ang OPTION MENU ng viewrecord method
         else if (option == 2)
         {
             system("cls");
-            loadingBar();
+            loadingBar(); // loading progress bar
             system("cls");
-            SetConsoleTextAttribute(h, 11);
+            SetConsoleTextAttribute(h, 11); // color changer
             cout << setw(60);
             cout << "LIST OF PERSON WHO ORDERED";
             SetConsoleTextAttribute(h, 7);
             cout << "\n==============================================================================================================\n";
-            viewrecord();
+            viewrecord(); // view method
         }
 
         // ito po ang OPTION menu ng paymentreceipt method
         else if (option == 3)
         {
             system("cls");
-            loadingBar();
+            loadingBar(); // loading progress bar
             system("cls");
-            paymentreceipt();
+            paymentreceipt(); // payment and receipt method
         }
 
         // ito po ang OPTION menu ng exit method
         else if (option == 4)
         {
             system("cls");
-            loadingBar();
+            loadingBar(); // loading progress bar
             system("cls");
-            exit();
+            SetConsoleTextAttribute(h, 7); // color changer
+            exit();                        // exit method
         }
 
         // ito po ay error message na kung saan kapag
@@ -117,7 +126,6 @@ int main()
             cin.clear();           // clear the previous input
             cin.ignore(123, '\n'); // discard the previous input
         }
-
     } while (option != 4);
     return 0;
 }
@@ -135,7 +143,7 @@ void menu()
     cin.ignore();
     system("cls");
     string fullname;
-    SetConsoleTextAttribute(h, 5);
+    SetConsoleTextAttribute(h, 9);
     cout << "" << setw(55) << "PLEASE ENTER YOUR FULLNAME FIRST";
     cout << "\n===============================================================================\n";
     SetConsoleTextAttribute(h, 7);
@@ -148,6 +156,8 @@ void menu()
 
     for (int i = 0; i < maxsize; i++)
     {
+        // pag hindi po empty ang pangalan
+        // pupunta na po sya sa order section
         if (_fullname[i] == "\0")
         {
             /*
@@ -155,12 +165,12 @@ void menu()
                 gumamit din po ako ng goto
                 para sa specific back po
             */
-        jump:
             system("cls");
             loadingBar();
             system("cls");
+        jump:
             SetConsoleTextAttribute(h, 14);
-            cout << setw(45) << "KIKI TAKOYAKI MENUS\n";
+            cout << setw(45) << "JEAN TAKOYAKI MENUS\n";
             cout << "==================================================================================\n";
             SetConsoleTextAttribute(h, 7);
             cout << setw(15) << "Flavors" << setw(15) << "4pcs" << setw(15) << "6pcs" << setw(17) << "8pcs\n";
@@ -205,25 +215,76 @@ void menu()
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 35;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 35;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 35;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 35;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 50;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 50;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 50;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 50;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 65;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 65;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 65;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 65;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else
                 {
@@ -250,25 +311,76 @@ void menu()
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 45;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 45;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 45;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 45;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 65;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 65;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 65;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 65;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 84;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 84;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 84;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 84;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else
                 {
@@ -295,25 +407,76 @@ void menu()
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 60;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 60;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 60;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 60;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 80;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 80;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 80;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 80;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 100;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 100;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 100;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 100;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else
                 {
@@ -340,25 +503,76 @@ void menu()
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 45;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 45;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 45;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 45;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 65;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 65;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 65;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 65;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Total_Price[i] = quantity * 84;
-                    _order_Quantity[i] = quantity;
-                    _order_Price[i] = 84;
+                    if (quantity <= 100 && quantity >= 1)
+                    {
+                        _order_Total_Price[i] = quantity * 84;
+                        _order_Quantity[i] = quantity;
+                        _order_Price[i] = 84;
+                    }
+                    else
+                    {
+                        SetConsoleTextAttribute(h, 4);
+                        cout << setw(15);
+                        cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
+                        SetConsoleTextAttribute(h, 7);
+                        cout << "\n===============================================================================\n";
+                        _getch();
+
+                        cin.clear();           // clear the previous input
+                        cin.ignore(123, '\n'); // discard the previous input
+                        system("cls");
+                        goto jump;
+                    }
                 }
                 else
                 {
@@ -395,9 +609,10 @@ void menu()
             _fullname[i] = fullname;
             _order_Pieces[i] = pieces;
             _order_Payment[i] = "NOT PAID";
-            cout << "\nPRESS ANY KEY TO CONTINUE...";
+            cout << "\nPLEASE ENTER ANY KEY TO CONTINUE...";
             _getch();
-            main();
+            system("cls");
+            loadingBar();
             break; // ito po break is para pag add po sya ng record 1 record at a time
         }
 
@@ -407,13 +622,19 @@ void menu()
         */
         else if (_fullname[i] == fullname)
         {
-            SetConsoleTextAttribute(h, 4);
-            cout << "\nCUSTOMER IS ALREADY EXIST PLEASE ENTER OTHER NAME";
-            SetConsoleTextAttribute(h, 7);
+
+            system("cls");
+            SetConsoleTextAttribute(h, 9);
+            cout << "" << setw(55) << "PLEASE ENTER YOUR FULLNAME FIRST";
             cout << "\n===============================================================================\n";
-            cout << "PRESS ANY KEY TO CONTINUE...";
+            SetConsoleTextAttribute(h, 4);
+            cout << "\n\nCUSTOMER IS ALREADY EXIST PLEASE ENTER OTHER NAME";
+            SetConsoleTextAttribute(h, 7);
+            cout << "\n\n===============================================================================\n\n";
+            cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
             _getch();
-            menu();
+            system("cls");
+            loadingBar();
             break;
         }
     }
@@ -479,7 +700,7 @@ void paymentreceipt()
     int recordList = 0;
     string fullname;
     double payment, total_change = 0, balance = 0, amount_balance = 0;
-    SetConsoleTextAttribute(h, 5);
+    SetConsoleTextAttribute(h, 9);
     cout << "" << setw(55) << "PLEASE ENTER YOUR FULLNAME FIRST";
     cout << "\n===============================================================================\n";
     SetConsoleTextAttribute(h, 7);
@@ -505,7 +726,7 @@ void paymentreceipt()
                 recordList++;
                 SetConsoleTextAttribute(h, 11);
                 cout << "" << setw(25) << "RECEIPT\n";
-                SetConsoleTextAttribute(h, 8);
+                SetConsoleTextAttribute(h, 7);
                 cout << "======================================\n";
                 cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
                 cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
@@ -514,7 +735,7 @@ void paymentreceipt()
                 cout << "QUANTITY: " << setw(27) << _order_Quantity[i] << "\n\n";
                 cout << "======================================\n";
                 cout << "TOTAL PRICE IS: " << setw(21) << _order_Total_Price[i];
-                cout << "\nINPUT PAYMENT:\t\t\t  " << _payment[i];
+                cout << "\nINPUT PAYMENT:\t\t\t " << _payment[i];
 
                 cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << _payment_change[i];
                 SetConsoleTextAttribute(h, 2);
@@ -531,14 +752,14 @@ void paymentreceipt()
                 /*
                     gumamit din po ako ng goto para sa specific back po
                 */
-            PAYMENT:
                 system("cls");
                 loadingBar();
                 system("cls");
+            PAYMENT:
                 recordList++;
                 SetConsoleTextAttribute(h, 11);
                 cout << "" << setw(25) << "RECEIPT\n";
-                SetConsoleTextAttribute(h, 8);
+                SetConsoleTextAttribute(h, 7);
                 cout << "======================================\n";
                 cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
                 cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
@@ -546,8 +767,8 @@ void paymentreceipt()
                 cout << "PRICE: " << setw(30) << _order_Total_Price[i] << "\n";
                 cout << "QUANTITY: " << setw(27) << _order_Quantity[i] << "\n\n";
                 cout << "======================================\n";
-                cout << "TOTAL PRICE IS: " << setw(20) << _order_Total_Price[i];
-                cout << "\nINPUT PAYMENT:\t\t\t ";
+                cout << "TOTAL PRICE IS: " << setw(21) << _order_Total_Price[i];
+                cout << "\nINPUT PAYMENT:\t\t\t  ";
                 cin >> payment;
 
                 balance = balance + payment;
@@ -569,13 +790,20 @@ void paymentreceipt()
                         ito po ang error message kapag kulang po ang
                         payment ni customer
                     */
-                    cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
                     amount_balance = _order_Total_Price[i] - balance;
-                    cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
+                    SetConsoleTextAttribute(h, 4);
+                    cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
+                    cout << "YOUR INPUT PAYMENT CASH IS ";
+                    SetConsoleTextAttribute(h, 6);
+                    cout << balance << " PESOS";
+                    SetConsoleTextAttribute(h, 4);
+                    cout << " YOUR BALANCE NEED TO PAY IS ";
+                    SetConsoleTextAttribute(h, 6);
+                    cout << amount_balance << " PESOS \n\n";
+                    SetConsoleTextAttribute(h, 7);
                     cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
                     _getch();
-
-                    loadingBar();
+                    system("cls");
                     goto PAYMENT;
                 }
             }
@@ -595,7 +823,7 @@ void paymentreceipt()
         SetConsoleTextAttribute(h, 11);
         cout << "\n"
              << setw(25) << "RECEIPT\n";
-        SetConsoleTextAttribute(h, 8);
+        SetConsoleTextAttribute(h, 7);
         cout << "======================================\n";
         SetConsoleTextAttribute(h, 4);
         cout << "\nNO RECORD FOUND\n";
@@ -615,18 +843,27 @@ void paymentreceipt()
 */
 void exit()
 {
-    SetConsoleTextAttribute(h, 7);
-    cout << "\n=================================================================================\n";
-    cout << "|"
-         << setw(80) << "|";
-    cout << "\n|" << setw(52) << "THANK YOU AND COME BACK AGAIN ";
-    SetConsoleTextAttribute(h, 4);
-    cout << "\3" << setw(28);
-    SetConsoleTextAttribute(h, 7);
-    cout << "|\n";
-    cout << "|"
-         << setw(80) << "|";
-    cout << "\n=================================================================================\n";
+    // para sa line
+    string line = "";
+    // name ng file
+    fstream myBannerFile;
+    // open ang txt file banner
+    myBannerFile.open("thank_you_banner.txt");
+    if (myBannerFile.is_open())
+    {
+        // fetch ang text sa banner text file
+        while (getline(myBannerFile, line))
+        {
+            // print ng line by line
+            cout << line << endl;
+        }
+    }
+    else
+    {
+        cout << "Failed to load the banner file." << endl;
+        cout << "No display output" << endl;
+    }
+    myBannerFile.close();
     _getch();
     exit(0);
 }
@@ -661,8 +898,32 @@ void loadingBar()
     for (int i = 0; i < 26; i++)
     {
         cout << b;
-
         // Sleep for 1 second
-        Sleep(100);
+        Sleep(50);
     }
+}
+
+void banner()
+{
+    // para sa line
+    string line = "";
+    // name ng file
+    fstream myBannerFile;
+    // open ang txt file banner
+    myBannerFile.open("banner.txt");
+    if (myBannerFile.is_open())
+    {
+        // fetch ang text sa banner text file
+        while (getline(myBannerFile, line))
+        {
+            // print ng line by line
+            cout << line << endl;
+        }
+    }
+    else
+    {
+        cout << "Failed to load the banner file." << endl;
+        cout << "No display output" << endl;
+    }
+    myBannerFile.close();
 }
