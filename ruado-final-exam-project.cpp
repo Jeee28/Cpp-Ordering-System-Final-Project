@@ -19,6 +19,8 @@ string _fullname[maxsize] = {};
 string _takoyaki_Order[maxsize] = {};
 string _order_Payment[maxsize] = {};
 double _order_Price[maxsize] = {};
+double _order_Total_Price[maxsize] = {};
+double _order_Pieces[maxsize] = {};
 double _order_Quantity[maxsize] = {};
 double _payment[maxsize] = {};
 double _payment_change[maxsize] = {};
@@ -75,10 +77,10 @@ int main()
             loadingBar();
             system("cls");
             SetConsoleTextAttribute(h, 11);
-            cout << setw(50);
+            cout << setw(60);
             cout << "LIST OF PERSON WHO ORDERED";
             SetConsoleTextAttribute(h, 7);
-            cout << "\n===============================================================================\n";
+            cout << "\n==============================================================================================================\n";
             viewrecord();
         }
 
@@ -198,26 +200,30 @@ void menu()
                 _takoyaki_Order[i] = "Cheesy-Yaki";
                 cout << "Ilan piraso po? ";
                 cin >> pieces;
+
                 if (pieces == 4)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 35;
+                    _order_Total_Price[i] = quantity * 35;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 35;
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 50;
+                    _order_Total_Price[i] = quantity * 50;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 50;
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 65;
+                    _order_Total_Price[i] = quantity * 65;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 65;
                 }
                 else
                 {
@@ -244,22 +250,25 @@ void menu()
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 45;
+                    _order_Total_Price[i] = quantity * 45;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 45;
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 65;
+                    _order_Total_Price[i] = quantity * 65;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 65;
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 84;
+                    _order_Total_Price[i] = quantity * 84;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 84;
                 }
                 else
                 {
@@ -279,29 +288,32 @@ void menu()
 
             else if (option == 3)
             {
-                _takoyaki_Order[i] = "Crab";
+                _takoyaki_Order[i] = "Octobits";
                 cout << "Ilan piraso po? ";
                 cin >> pieces;
                 if (pieces == 4)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 60;
+                    _order_Total_Price[i] = quantity * 60;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 60;
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 80;
+                    _order_Total_Price[i] = quantity * 80;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 80;
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 100;
+                    _order_Total_Price[i] = quantity * 100;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 100;
                 }
                 else
                 {
@@ -321,29 +333,32 @@ void menu()
 
             else if (option == 4)
             {
-                _takoyaki_Order[i] = "Crab";
+                _takoyaki_Order[i] = "Squid";
                 cout << "Ilan piraso po? ";
                 cin >> pieces;
                 if (pieces == 4)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 45;
+                    _order_Total_Price[i] = quantity * 45;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 45;
                 }
                 else if (pieces == 6)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 65;
+                    _order_Total_Price[i] = quantity * 65;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 65;
                 }
                 else if (pieces == 8)
                 {
                     cout << "Ilan order po? ";
                     cin >> quantity;
-                    _order_Price[i] = quantity * 84;
+                    _order_Total_Price[i] = quantity * 84;
                     _order_Quantity[i] = quantity;
+                    _order_Price[i] = 84;
                 }
                 else
                 {
@@ -378,6 +393,7 @@ void menu()
             }
 
             _fullname[i] = fullname;
+            _order_Pieces[i] = pieces;
             _order_Payment[i] = "NOT PAID";
             cout << "\nPRESS ANY KEY TO CONTINUE...";
             _getch();
@@ -411,8 +427,8 @@ void viewrecord()
 {
     int recordList = 0;
     string payment_color;
-    cout << "NO." << setw(15) << "FULLNAME" << setw(15) << "ORDER" << setw(15) << "PRICE" << setw(15) << "QUANTITY" << setw(15) << "PAYMENT";
-    cout << "\n===============================================================================\n";
+    cout << "NO." << setw(15) << "FULLNAME" << setw(15) << "ORDER" << setw(15) << "PIECES" << setw(15) << "PRICE" << setw(15) << "QUANTITY" << setw(15) << "TOTAL PRICE" << setw(15) << "PAYMENT";
+    cout << "\n==============================================================================================================\n";
 
     for (int i = 0; i < maxsize; i++)
     {
@@ -431,9 +447,9 @@ void viewrecord()
                 SetConsoleTextAttribute(h, 2);
             }
 
-            cout << recordList << setw(15) << _fullname[i] << setw(15) << _takoyaki_Order[i] << setw(15) << _order_Price[i] << setw(15) << _order_Quantity[i] << setw(15) << payment_color;
+            cout << recordList << setw(15) << _fullname[i] << setw(17) << _takoyaki_Order[i] << setw(15) << _order_Pieces[i] << setw(15) << _order_Price[i] << setw(15) << _order_Quantity[i] << setw(15) << _order_Total_Price[i] << setw(15) << payment_color;
             SetConsoleTextAttribute(h, 7);
-            cout << "\n===============================================================================\n";
+            cout << "\n==============================================================================================================\n";
         }
     }
 
@@ -447,7 +463,7 @@ void viewrecord()
         SetConsoleTextAttribute(h, 4);
         cout << "\nNO RECORD FOUND\n";
         SetConsoleTextAttribute(h, 7);
-        cout << "\n===============================================================================";
+        cout << "\n==============================================================================================================";
     }
     cout << "\n\nPLEASE ENTER ANY KEY TO GO BACK...";
     _getch();
@@ -493,10 +509,11 @@ void paymentreceipt()
                 cout << "======================================\n";
                 cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
                 cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
-                cout << "PRICE: " << setw(30) << _order_Price[i] << "\n";
-                cout << "QUANTITY: " << setw(25) << _order_Quantity[i] << "\n\n";
+                cout << "PIECES: " << setw(29) << _order_Pieces[i] << "\n";
+                cout << "PRICE: " << setw(30) << _order_Total_Price[i] << "\n";
+                cout << "QUANTITY: " << setw(27) << _order_Quantity[i] << "\n\n";
                 cout << "======================================\n";
-                cout << "TOTAL PRICE IS: " << setw(21) << _order_Price[i];
+                cout << "TOTAL PRICE IS: " << setw(21) << _order_Total_Price[i];
                 cout << "\nINPUT PAYMENT:\t\t\t  " << _payment[i];
 
                 cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << _payment_change[i];
@@ -525,19 +542,20 @@ void paymentreceipt()
                 cout << "======================================\n";
                 cout << "\nFULLNAME: " << setw(27) << _fullname[i] << "\n";
                 cout << "ORDER: " << setw(30) << _takoyaki_Order[i] << "\n";
-                cout << "PRICE: " << setw(30) << _order_Price[i] << "\n";
-                cout << "QUANTITY: " << setw(25) << _order_Quantity[i] << "\n\n";
+                cout << "PIECES: " << setw(29) << _order_Pieces[i] << "\n";
+                cout << "PRICE: " << setw(30) << _order_Total_Price[i] << "\n";
+                cout << "QUANTITY: " << setw(27) << _order_Quantity[i] << "\n\n";
                 cout << "======================================\n";
-                cout << "TOTAL PRICE IS: " << setw(20) << _order_Price[i];
+                cout << "TOTAL PRICE IS: " << setw(20) << _order_Total_Price[i];
                 cout << "\nINPUT PAYMENT:\t\t\t ";
                 cin >> payment;
 
                 balance = balance + payment;
-                if (balance >= _order_Price[i])
+                if (balance >= _order_Total_Price[i])
                 {
                     _payment[i] = balance;
                     _order_Payment[i] = "PAID";
-                    total_change = balance - _order_Price[i];
+                    total_change = balance - _order_Total_Price[i];
                     _payment_change[i] = total_change;
                     cout << "\nYOUR TOTAL CHANGE IS " << setw(16) << total_change;
                     SetConsoleTextAttribute(h, 2);
@@ -552,7 +570,7 @@ void paymentreceipt()
                         payment ni customer
                     */
                     cout << "\nINSUFFICIENT CASH PAYMENT! PLEASE ADD A CASH TO PAY\n";
-                    amount_balance = _order_Price[i] - balance;
+                    amount_balance = _order_Total_Price[i] - balance;
                     cout << "YOUR INPUT PAYMENT CASH IS " << balance << " YOUR BALANCE NEED TO PAY IS " << amount_balance << "\n\n";
                     cout << "PLEASE PRESS ANY KEY TO CONTINUE...";
                     _getch();
