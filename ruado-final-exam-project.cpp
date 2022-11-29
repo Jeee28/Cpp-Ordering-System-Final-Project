@@ -228,6 +228,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -253,6 +254,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -278,6 +280,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -293,6 +296,7 @@ void menu()
                     cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                     SetConsoleTextAttribute(h, 7);
                     cout << "\n===============================================================================\n";
+                    cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                     _getch();
 
                     cin.clear();           // clear the previous input
@@ -324,6 +328,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -349,6 +354,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -374,6 +380,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -389,6 +396,7 @@ void menu()
                     cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                     SetConsoleTextAttribute(h, 7);
                     cout << "\n===============================================================================\n";
+                    cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                     _getch();
 
                     cin.clear();           // clear the previous input
@@ -420,6 +428,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -445,6 +454,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -470,6 +480,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -485,6 +496,7 @@ void menu()
                     cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                     SetConsoleTextAttribute(h, 7);
                     cout << "\n===============================================================================\n";
+                    cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                     _getch();
 
                     cin.clear();           // clear the previous input
@@ -516,6 +528,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -541,6 +554,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -566,6 +580,7 @@ void menu()
                         cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                         SetConsoleTextAttribute(h, 7);
                         cout << "\n===============================================================================\n";
+                        cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                         _getch();
 
                         cin.clear();           // clear the previous input
@@ -581,6 +596,7 @@ void menu()
                     cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                     SetConsoleTextAttribute(h, 7);
                     cout << "\n===============================================================================\n";
+                    cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                     _getch();
 
                     cin.clear();           // clear the previous input
@@ -598,6 +614,7 @@ void menu()
                 cout << "\nINVALID INPUT PLEASE TRY AGAIN...\n";
                 SetConsoleTextAttribute(h, 7);
                 cout << "\n===============================================================================\n";
+                cout << "PLEASE ENTER ANY KEY TO CONTINUE...";
                 _getch();
 
                 cin.clear();           // clear the previous input
@@ -623,6 +640,8 @@ void menu()
         else if (_fullname[i] == fullname)
         {
 
+            system("cls");
+            loadingBar();
             system("cls");
             SetConsoleTextAttribute(h, 9);
             cout << "" << setw(55) << "PLEASE ENTER YOUR FULLNAME FIRST";
