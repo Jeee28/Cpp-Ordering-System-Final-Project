@@ -1,6 +1,4 @@
-/*
-    ito po ang mga libraries na ginamit po para sa program po na ito
-*/
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -126,7 +124,7 @@ int main()
             cin.clear();           // clear the previous input
             cin.ignore(123, '\n'); // discard the previous input
         }
-    } while (option != 4);
+    } while (true);
     return 0;
 }
 
